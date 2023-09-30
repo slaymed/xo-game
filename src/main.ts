@@ -10,6 +10,7 @@ import { X } from "./xo/shapes/X";
 import { O } from "./xo/shapes/O";
 import { XOGrid } from "./xo/Grid";
 import { Global } from "./static/Global";
+import { Pointer } from "./canvas/Pointer";
 
 const controller = new CanvasController({
     canvas: document.querySelector("canvas")!,
@@ -24,13 +25,19 @@ Global.canvasController = controller;
 const playersController = new XOPlayersController();
 playersController.addPlayer(new XOPlayer({ ShapeRef: O, cpu: true }));
 playersController.addPlayer(new XOPlayer({ ShapeRef: X }));
-playersController.addPlayer(new XOPlayer({ ShapeRef: X }));
 
 const board = new XOBoard({
     w: controller.canvas.width,
     h: controller.canvas.height,
 });
-board.instantiateGrid(XOGrid);
+board.instantiateGrid(XOGrid, { cols: 3, rows: 3, cellsToWin: 3 });
+
+// board.grid.cell(new Pointer(1, 1))?.fill(X);
+// board.grid.cell(new Pointer(2, 1))?.fill(O);
+// board.grid.cell(new Pointer(3, 1))?.fill(O);
+// board.grid.cell(new Pointer(2, 2))?.fill(O);
+// board.grid.cell(new Pointer(2, 3))?.fill(X);
+// board.grid.cell(new Pointer(3, 3))?.fill(X);
 
 const game = new XOGame({ board, playersController });
 

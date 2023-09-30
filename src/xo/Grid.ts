@@ -50,6 +50,17 @@ export class XOGrid extends Grid<XOCell> implements IXOGrid {
         return this._cellsToWin;
     }
 
+    public get full(): boolean {
+        for (const [, cell] of this.cells) if (cell.empty) return false;
+        return true;
+    }
+
+    public get emptyCellsCount(): number {
+        let count = 0;
+        for (const [, cell] of this.cells) if (cell.empty) count += 1;
+        return count;
+    }
+
     protected initializeGrid(): void {
         const topLeftPoints = new Set<Pointer>();
         const topRightPoints = new Set<Pointer>();

@@ -35,6 +35,10 @@ export class XOCell extends Cell implements IXOCell {
         });
     }
 
+    public clear(): void {
+        this._shape = undefined;
+    }
+
     public get empty(): boolean {
         return !this._shape;
     }

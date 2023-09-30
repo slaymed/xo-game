@@ -9,4 +9,5 @@ export interface IXOCell extends ICell {
     get shape(): IShape | undefined;
 
     fill(Shape: Class<[UIOptions], IShape>): void;
+    clear(): void;
 }

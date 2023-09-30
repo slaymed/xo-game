@@ -6,11 +6,12 @@ export class XOPlayersController implements IXOPlayersController {
 
     private _playerIndex = 0;
 
-    public addPlayer(player: IXOPlayer): void {
+    public addPlayer(player: IXOPlayer): IXOPlayer {
         this._players.add(player);
+        return player;
     }
 
-    public next(): void {
+    public finishTurn(): void {
         this._playerIndex += 1;
         if (this._playerIndex >= this._players.size) this._playerIndex = 0;
     }
@@ -20,8 +21,21 @@ export class XOPlayersController implements IXOPlayersController {
     }
 
     public get current(): IXOPlayer {
-        const player = this.players[this._playerIndex];
+        return this.target(this._playerIndex);
+    }
+
+    public get next(): IXOPlayer {
+        const index = this._playerIndex;
+        this.finishTurn();
+        const current = this.current;
+        this._playerIndex = index;
+        return current;
+    }
+
+    public target(index: number): IXOPlayer {
+        const player = this.players[index];
         if (!player) throw new Error("No Player Found");
+
         return player;
     }
 }

@@ -8,4 +8,6 @@ export interface IXOGrid extends IGrid<IXOCell> {
     get colsPointers(): Array<Array<Pointer>>;
     get linesPointers(): Array<Array<Pointer>>;
     get cellsToWin(): number;
+    get full(): boolean;
+    get emptyCellsCount(): number;
 }
